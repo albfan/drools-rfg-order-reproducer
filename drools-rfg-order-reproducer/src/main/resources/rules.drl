@@ -1,0 +1,31 @@
+package org.drools.test;
+
+import java.lang.String;
+
+
+
+rule "StartAgendaGroup"
+salience 100
+when
+	String(this == "startRuleFlow")
+then
+	System.out.println("Starting ruleflow-group");
+	kcontext.getKnowledgeRuntime().startProcess("test.simple-ruleflow");
+end
+
+
+rule "Rule1-RFG1"
+ruleflow-group "rfg1"
+when
+	String(this=="fact")
+then
+	System.out.println("Firing Rule 1 in RuleFlowGroup1");
+end
+
+rule "Rule2-RFG2"
+ruleflow-group "rfg2"
+when
+	String(this=="fact")
+then
+	System.out.println("Firing Rule 2 in RuleFlowGroup2");
+end
